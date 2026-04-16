@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Poisson</title>
+    <link rel="stylesheet" href="estilos.css">
+
+    <!-- Tipografías -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="bg-orb orb-1" aria-hidden="true"></div>
+<div class="bg-orb orb-2" aria-hidden="true"></div>
+
+<main class="app">
+
+    <header class="bento header">
+        <div class="title-wrap">
+            <span class="stat-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M4 18h16M6.5 15.5V10m5 5.5V7m5 8.5V12" />
+                </svg>
+            </span>
+            <h1>Calculadora de Poisson</h1>
+        </div>
+        <p class="subtitle">Análisis probabilístico rápido para eventos discretos</p>
+    </header>
+
+    <section class="bento context">
+        <p class="context-kicker">Caso base</p>
+        <p>
+            Una secretaria comete dos errores por página, en promedio.
+            ¿Cuál es la probabilidad de que en la siguiente página cometa
+            una cantidad específica de errores?
+        </p>
+        <p class="formula">P(X = k) = (e<sup>-λ</sup> λ<sup>k</sup>) / k!</p>
+    </section>
+
+    <div class="grid">
+
+        <section class="bento input panel">
+            <div class="panel-head">
+                <p class="panel-title">Panel de Variables</p>
+                <p class="panel-meta">Lambda fija en 2 errores por página</p>
+            </div>
+
+            <label for="tipo_valor">Tipo de cálculo</label>
+            <select id="tipo_valor" onchange="verificarSeleccion()">
+                <option value="unico">Un solo valor</option>
+                <option value="rango">Entre dos valores</option>
+            </select>
+
+            <div id="bloque_condicion_unico" class="conditional-block">
+                <label for="errores">Errores</label>
+                <input type="number" id="errores" min="0" step="1">
+
+                <label for="cond_unico">Condicion</label>
+                <select id="cond_unico">
+                    <option value="exactamente">Exactamente</option>
+                    <option value="al_menos">Al menos</option>
+                    <option value="a_lo_mas">A lo más</option>
+                    <option value="mas_de">Más de</option>
+                    <option value="menos_de">Menos de</option>
+                </select>
+            </div>
+
+            <div id="bloque_condicion_rango" class="conditional-block" style="display: none;">
+                <label for="errores_minimos">Errores mínimos</label>
+                <input type="number" id="errores_minimos" min="0" step="1">
+
+                <label for="errores_maximos">Errores máximos</label>
+                <input type="number" id="errores_maximos" min="0" step="1">
+            </div>
+
+            <button class="cta" onclick="Calcular_probabilidad()">Calcular Probabilidad</button>
+            <p id="error" aria-live="polite"></p>
+        </section>
+
+        <section class="bento resultado">
+            <p class="label">Resultado</p>
+            <p id="salida">--</p>
+            <p class="result-note">Probabilidad estimada para la próxima página</p>
+        </section>
+
+    </div>
+
+</main>
+
+<script src="logicaScript.js"></script>
+
+</body>
+</html>
